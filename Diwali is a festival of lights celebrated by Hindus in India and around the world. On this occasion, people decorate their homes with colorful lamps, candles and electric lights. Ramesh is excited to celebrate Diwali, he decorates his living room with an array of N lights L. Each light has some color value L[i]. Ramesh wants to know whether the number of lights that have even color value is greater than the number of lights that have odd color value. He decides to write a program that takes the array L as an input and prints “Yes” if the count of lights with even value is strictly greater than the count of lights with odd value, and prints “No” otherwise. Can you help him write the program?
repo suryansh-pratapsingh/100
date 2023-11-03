@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+     int T; // Number of test cases
+    scanf("%d", &T);
+
+    while (T--) {
+        int N; // Number of lights in the current test case
+        scanf("%d", &N);
+
+        int even_count = 0; // Count of lights with even color value
+        int odd_count = 0;  // Count of lights with odd color value
+
+        for (int i = 0; i < N; i++) {
+            int light_color;
+            scanf("%d", &light_color);
+
+            if (light_color % 2 == 0) {
+                even_count++;
+            } else {
+                odd_count++;
+            }
+        }
+
+        // Compare the counts and print the result
+        if (even_count > odd_count) {
+            printf("Yes\n");
+        } else {
+            printf("No\n");
+        }
+    }
+    return 0;
+}
