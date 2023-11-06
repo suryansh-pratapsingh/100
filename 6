@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <string.h>
+
+void reverseSubstring(char* str, int start, int end) {
+    while (start < end) {
+        char temp = str[start];
+        str[start] = str[end];
+        str[end] = temp;
+        start++;
+        end--;
+    }
+}
+
+int main() {
+    int T;
+    scanf("%d", &T); // Read the number of test cases
+
+    while (T--) {
+        int K;
+        char S[1001];
+        scanf("%d", &K);  // Read the position to reverse
+        scanf("%s", S);    // Read the input string
+
+        // Check if K is within the string length
+        if (K >= 0 && K <= strlen(S)) {
+            reverseSubstring(S, 0, K - 1);  // Reverse the substring from the start to K-1
+            printf("%s\n", S);             // Print the reversed string
+        }
+    }
+
+    return 0;
+}
