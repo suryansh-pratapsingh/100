@@ -1,0 +1,28 @@
+# Define a dictionary to map month abbreviations to their respective number of days
+month_days = {
+    'JAN': 31, 'FEB': 28, 'MAR': 31, 'APR': 30, 'MAY': 31, 'JUN': 30,
+    'JUL': 31, 'AUG': 31, 'SEP': 30, 'OCT': 31, 'NOV': 30, 'DEC': 31
+}
+
+# Function to calculate the day of the year for a given date
+def day_of_year(date):
+    day = int(date[:2])  # Extract the day from the input
+    month = date[2:]  # Extract the month abbreviation from the input
+    day_count = day  # Initialize the day count with the day
+    
+    # Calculate the day count by summing the days of each month up to the given month
+    for m in month_days:
+        if m == month:
+            break
+        day_count += month_days[m]
+    
+    return day_count
+
+# Read the number of test cases
+T = int(input())
+
+# Process each test case
+for _ in range(T):
+    date = input().strip()
+    day_count = day_of_year(date)
+    print(day_count)
