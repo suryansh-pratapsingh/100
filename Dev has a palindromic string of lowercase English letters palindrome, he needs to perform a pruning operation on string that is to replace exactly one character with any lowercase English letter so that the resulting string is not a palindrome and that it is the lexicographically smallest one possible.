@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <string.h>
+
+// Function to find the lexicographically smallest resulting non-palindromic string
+void smallest_non_palindrome(char* s) {
+    int n = strlen(s);
+
+    // If the string has only one character, it's not possible to make it non-palindromic
+    if (n == 1) {
+        strcpy(s, "-1");
+        return;
+    }
+
+    // Iterate through the string and find the first character that can be changed to 'a'
+    for (int i = 0; i < n / 2; i++) {
+        if (s[i] != 'a') {
+            s[i] = 'a';
+            return;
+        }
+    }
+
+    // If all characters are 'a', change the last character to 'b'
+    if (s[n - 1] == 'a') {
+        s[n - 1] = 'b';
+        return;
+    }
+
+    // If no character can be changed, set the string to -1
+    strcpy(s, "-1");
+}
+
+int main() {
+    // Input the number of test cases
+    int T;
+    scanf("%d", &T);
+
+    // Process each test case
+    for (int t = 0; t < T; t++) {
+        // Input the palindromic string
+        char palindrome[1001];
+        scanf("%s", palindrome);
+
+        // Get the lexicographically smallest resulting string
+        smallest_non_palindrome(palindrome);
+
+        // Output the result
+        printf("%s\n", palindrome);
+    }
+
+    return 0;
+}
