@@ -1,0 +1,44 @@
+import math
+
+# Function to calculate Euclidean distance
+def euclidean_distance(x, y):
+    return math.sqrt(x**2 + y**2)
+
+# Number of test cases
+T = int(input())
+
+for _ in range(T):
+    # Initial coordinates
+    x, y = map(int, input().split())
+    
+    # Instructions string
+    instructions = input()
+    
+    # Initialize variables to store final coordinates
+    final_x, final_y = x, y
+    
+    # Process instructions
+    i = 0
+    while i < len(instructions):
+        direction = instructions[i]
+        i += 1
+        distance = 0
+        
+        while i < len(instructions) and instructions[i].isdigit():
+            distance = distance * 10 + int(instructions[i])
+            i += 1
+        
+        if direction == 'N':
+            final_y += distance
+        elif direction == 'S':
+            final_y -= distance
+        elif direction == 'E':
+            final_x += distance
+        elif direction == 'W':
+            final_x -= distance
+    
+    # Calculate the Euclidean distance
+    distance = euclidean_distance(final_x, final_y)
+    
+    # Output the result with two decimal places
+    print("{:.2f}".format(distance))
