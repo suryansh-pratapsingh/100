@@ -1,0 +1,36 @@
+#include <iostream>
+
+using namespace std;
+
+int findWinner(int n, int time) {
+    int position = 1;  // Initially, the first person has the soan papdi
+    int direction = 1;  // Initial direction is moving to the right
+
+    // Simulate the passing of soan papdi for 'time' seconds
+    for (int i = 1; i <= time; ++i) {
+        // Move to the next person based on the current direction
+        position += direction;
+
+        // If at the beginning or end of the line, change the direction
+        if (position == 1 || position == n) {
+            direction *= -1;
+        }
+    }
+
+    return position;
+}
+
+int main() {
+    int T;
+    cin >> T;
+
+    while (T--) {
+        int n, time;
+        cin >> n >> time;
+
+        int winner = findWinner(n, time);
+        cout << winner << endl;
+    }
+
+    return 0;
+}
