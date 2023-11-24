@@ -1,0 +1,71 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Function to apply Game of Life rules to the given pixel matrix
+void applyRules(vector<vector<int>>& matrix, int m, int n) {
+    vector<vector<int>> nextMatrix = matrix;
+
+    // Iterate through each pixel in the matrix
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            // Count the illuminated neighbors
+            int illuminatedNeighbors = 0;
+
+            for (int x = -1; x <= 1; ++x) {
+                for (int y = -1; y <= 1; ++y) {
+                    if (i + x >= 0 && i + x < m && j + y >= 0 && j + y < n && !(x == 0 && y == 0)) {
+                        illuminatedNeighbors += matrix[i + x][j + y];
+                    }
+                }
+            }
+
+            // Apply Game of Life rules
+            if (matrix[i][j] == 1) {
+                if (illuminatedNeighbors < 2 || illuminatedNeighbors > 3) {
+                    nextMatrix[i][j] = 0;
+                }
+            } else {
+                if (illuminatedNeighbors == 3) {
+                    nextMatrix[i][j] = 1;
+                }
+            }
+        }
+    }
+
+    // Update the original matrix with the next state
+    matrix = nextMatrix;
+}
+
+int main() {
+    int T;
+    cin >> T;
+
+    while (T--) {
+        int m, n;
+        cin >> m >> n;
+
+        vector<vector<int>> matrix(m, vector<int>(n));
+
+        // Input pixel matrix
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                cin >> matrix[i][j];
+            }
+        }
+
+        // Apply rules and output the next state
+        applyRules(matrix, m, n);
+
+        // Output the next state
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                cout << matrix[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+
+    return 0;
+}
