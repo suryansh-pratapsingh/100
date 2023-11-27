@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+// Function to check if the participant is the winner
+int isWinner(int matrix[100][100], int m, int n) {
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            // Check if elements on both diagonals are non-zero
+            if ((i == j || i + j == n - 1) && matrix[i][j] == 0) {
+                return 0; // false
+            }
+            // Check if all other elements are zero
+            else if (i != j && i + j != n - 1 && matrix[i][j] != 0) {
+                return 0; // false
+            }
+        }
+    }
+    return 1; // true
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+
+    while (T--) {
+        int m, n;
+        scanf("%d %d", &m, &n);
+
+        int matrix[100][100];
+
+        // Input matrix elements
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                scanf("%d", &matrix[i][j]);
+            }
+        }
+
+        // Check if the participant is the winner and print the result
+        if (isWinner(matrix, m, n)) {
+            printf("true\n");
+        } else {
+            printf("false\n");
+        }
+    }
+
+    return 0;
+}
