@@ -1,0 +1,26 @@
+def cut_word_into_pieces(word):
+    last_occurrence = {char: idx for idx, char in enumerate(word)}
+    result = []
+
+    start, end = 0, 0
+    for idx, char in enumerate(word):
+        end = max(end, last_occurrence[char])
+
+        if idx == end:
+            result.append(end - start + 1)
+            start = idx + 1
+
+    return result
+
+# Read the number of test cases
+t = int(input())
+
+for _ in range(t):
+    # Read the input word for each test case
+    s = input().strip()
+
+    # Get the sizes of the pieces
+    sizes = cut_word_into_pieces(s)
+
+    # Print the sizes of the pieces
+    print(" ".join(map(str, sizes)))
