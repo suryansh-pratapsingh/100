@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+void reverseString(char *s) {
+    int length = strlen(s);
+    char letters[length];
+    char nonLetters[length];
+    int lettersIndex = 0;
+    int nonLettersIndex = 0;
+
+    // Separate letters and non-letters
+    for (int i = 0; i < length; i++) {
+        if (isalpha(s[i])) {
+            letters[lettersIndex++] = s[i];
+        } else {
+            nonLetters[nonLettersIndex++] = s[i];
+        }
+    }
+
+    // Reverse the letters
+    for (int i = 0; i < lettersIndex / 2; i++) {
+        char temp = letters[i];
+        letters[i] = letters[lettersIndex - i - 1];
+        letters[lettersIndex - i - 1] = temp;
+    }
+
+    // Combine the reversed letters and non-letters
+    int resultIndex = 0;
+    for (int i = 0; i < length; i++) {
+        if (isalpha(s[i])) {
+            s[i] = letters[resultIndex++];
+        } else {
+            s[i] = nonLetters[i - resultIndex];
+        }
+    }
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+
+    while (T--) {
+        char s[1001];
+        scanf("%s", s);
+
+        // Reverse the string according to the rules
+        reverseString(s);
+
+        // Print the result
+        printf("%s\n", s);
+    }
+
+    return 0;
+}
