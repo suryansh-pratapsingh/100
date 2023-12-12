@@ -1,0 +1,29 @@
+def last_remaining(n):
+    remaining = 1
+    step_size = 1
+    left_to_right = True
+
+    while n > 1:
+        if left_to_right or n % 2 == 1:
+            remaining += step_size
+
+        n //= 2
+        step_size *= 2
+        left_to_right = not left_to_right
+
+    return remaining
+
+def main():
+    # Read the number of test cases
+    T = int(input().strip())
+
+    for _ in range(T):
+        # Read the value of n for each test case
+        n = int(input().strip())
+
+        # Output the result for each test case
+        result = last_remaining(n)
+        print(result)
+
+if __name__ == "__main__":
+    main()
