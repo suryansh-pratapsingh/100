@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int countWaysToClimb(int n) {
+    if (n == 0 || n == 1) {
+        return 1;
+    } else if (n == 2) {
+        return 2;
+    }
+
+    vector<int> ways(n + 1, 0);
+    ways[0] = 1;
+    ways[1] = 1;
+    ways[2] = 2;
+
+    for (int i = 3; i <= n; ++i) {
+        ways[i] = ways[i - 1] + ways[i - 2] + ways[i - 3];
+    }
+
+    return ways[n];
+}
+
+int main() {
+    int T;
+    cin >> T;
+
+    for (int t = 0; t < T; ++t) {
+        int n;
+        cin >> n;
+        int result = countWaysToClimb(n);
+        cout << result << endl;
+    }
+
+    return 0;
+}
