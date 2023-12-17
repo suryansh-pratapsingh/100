@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int findSpecial(vector<int> nums) {
+    int n = nums.size();
+    for(int x = 0; x <= 1000; x++) {
+        int count = 0;
+        for(int i = 0; i < n; i++) {
+            if(nums[i] >= x) 
+                count++;
+        }
+        if(count == x)
+            return x;
+    }
+    return -1; 
+}
+
+int main() {
+    
+    int t;
+    cin >> t;
+    
+    while(t--) {
+        int n; 
+        cin >> n;
+        
+        vector<int> nums(n);
+        for(int i = 0; i < n; i++) {
+            cin >> nums[i];
+        }
+        
+        int x = findSpecial(nums); 
+        cout << x << "\n";
+    }
+    
+    return 0;
+}
