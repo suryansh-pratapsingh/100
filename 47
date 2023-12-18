@@ -1,0 +1,22 @@
+def min_moves_to_destination(target):
+    target = abs(target)  # Consider only positive values for simplicity
+
+    # Initialize variables
+    total_sum = 0
+    num_moves = 0
+
+    # Keep moving until the total sum is greater than or equal to the target
+    while total_sum < target or (total_sum - target) % 2 != 0:
+        num_moves += 1
+        total_sum += num_moves
+
+    return num_moves
+
+# Input the number of test cases
+T = int(input().strip())
+
+# Process each test case
+for _ in range(T):
+    target = int(input().strip())
+    result = min_moves_to_destination(target)
+    print(result)
