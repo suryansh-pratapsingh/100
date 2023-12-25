@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	vector<string> ans;
+	while(t--){
+	    long long x,y;
+	    cin>>x>>y;
+	    
+	    long long dif = abs(x-y);
+	    if(dif>=2){
+	        if(x>y)ans.push_back("Raju");
+	        else ans.push_back("Chutki");
+	    }
+	    else{
+	        if(x == y){
+	            if(x%2)ans.push_back("Raju");
+	            else ans.push_back("Chutki");
+	        }
+	        else{
+	             
+	               long long mn = min(x,y);
+	               if(mn%2)ans.push_back("Raju");
+	               else ans.push_back("Chutki");
+	            
+	        }
+	    }
+	}
+    for(auto it:ans){
+        cout<<it<<endl;
+    }
+	return 0;
+}
