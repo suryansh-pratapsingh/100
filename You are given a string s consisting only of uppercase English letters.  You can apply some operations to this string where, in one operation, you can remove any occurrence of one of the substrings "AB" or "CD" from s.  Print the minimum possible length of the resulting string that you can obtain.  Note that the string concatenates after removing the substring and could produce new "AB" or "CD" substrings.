@@ -1,0 +1,14 @@
+def min_length_after_operations(s):
+    while "AB" in s or "CD" in s:
+        s = s.replace("AB", "").replace("CD", "")
+    return len(s)
+
+def main():
+    T = int(input())
+    for _ in range(T):
+        s = input().strip()
+        result = min_length_after_operations(s)
+        print(result)
+
+if __name__ == "__main__":
+    main()
