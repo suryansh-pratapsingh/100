@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+
+bool isSubsequence(const std::string& a, const std::string& b) {
+    int i = 0, j = 0;
+    while (i < a.length() && j < b.length()) {
+        if (a[i] == b[j]) {
+            i++;
+        }
+        j++;
+    }
+    return i == a.length();
+}
+
+bool canMarry(const std::string& m, const std::string& w) {
+    return isSubsequence(m, w) || isSubsequence(w, m);
+}
+
+int main() {
+    int T;
+    std::cin >> T;
+
+    while (T--) {
+        std::string m, w;
+        std::cin >> m >> w;
+
+        if (canMarry(m, w)) {
+            std::cout << "YES" << std::endl;
+        } else {
+            std::cout << "NO" << std::endl;
+        }
+    }
+
+    return 0;
+}
