@@ -1,0 +1,29 @@
+def find_132_pattern(nums):
+    n = len(nums)
+    if n < 3:
+        return "No"
+
+    min_prefix = [nums[0]]
+    for i in range(1, n):
+        min_prefix.append(min(min_prefix[-1], nums[i]))
+
+    stack = []
+    for j in range(n - 1, -1, -1):
+        while stack and stack[-1] <= min_prefix[j]:
+            stack.pop()
+        if stack and stack[-1] < nums[j]:
+            return "Yes"
+        stack.append(nums[j])
+
+    return "No"
+
+def main():
+    T = int(input().strip())
+    for _ in range(T):
+        n = int(input().strip())
+        nums = list(map(int, input().strip().split()))
+        result = find_132_pattern(nums)
+        print(result)
+
+if __name__ == "__main__":
+    main()
