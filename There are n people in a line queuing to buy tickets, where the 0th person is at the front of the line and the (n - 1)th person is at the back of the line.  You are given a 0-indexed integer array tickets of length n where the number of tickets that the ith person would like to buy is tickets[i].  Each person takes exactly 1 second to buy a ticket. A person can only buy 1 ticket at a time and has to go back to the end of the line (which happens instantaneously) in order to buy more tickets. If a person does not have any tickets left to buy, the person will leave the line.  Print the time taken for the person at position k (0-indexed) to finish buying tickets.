@@ -1,0 +1,22 @@
+# Function to calculate the time taken for the person at position k to finish buying tickets
+def time_taken(n, k, tickets):
+    time = 0
+    while tickets[k] > 0:
+        for i in range(n):
+            if tickets[i] > 0:
+                tickets[i] -= 1
+                time += 1
+                if i == k and tickets[k] == 0:
+                    return time
+
+# Read the number of test cases
+T = int(input())
+
+# Process each test case
+for _ in range(T):
+    # Read input for each test case
+    n, k = map(int, input().split())
+    tickets = list(map(int, input().split()))
+
+    result = time_taken(n, k, tickets)
+    print(result)
