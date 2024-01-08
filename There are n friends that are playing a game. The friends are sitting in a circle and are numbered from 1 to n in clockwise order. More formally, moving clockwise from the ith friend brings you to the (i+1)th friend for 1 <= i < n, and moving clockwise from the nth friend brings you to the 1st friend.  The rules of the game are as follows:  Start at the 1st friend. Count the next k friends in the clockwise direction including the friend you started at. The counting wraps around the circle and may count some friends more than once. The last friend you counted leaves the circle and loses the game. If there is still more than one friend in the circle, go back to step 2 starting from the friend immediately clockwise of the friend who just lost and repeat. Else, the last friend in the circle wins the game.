@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int find_winner(int n, int k) {
+    vector<int> friends;
+    for (int i = 1; i <= n; ++i) {
+        friends.push_back(i);
+    }
+
+    int current_index = 0;
+
+    while (friends.size() > 1) {
+        current_index = (current_index + k - 1) % friends.size();
+        friends.erase(friends.begin() + current_index);
+    }
+
+    return friends[0];
+}
+
+int main() {
+    int T;
+    cout << "Enter the number of testcases (T): ";
+    cin >> T;
+
+    for (int t = 0; t < T; ++t) {
+        int n, k;
+        cout << "Enter values of n and k separated by a space: ";
+        cin >> n >> k;
+        int winner = find_winner(n, k);
+        cout << "Winner for testcase " << t << ": " << winner << endl;
+    }
+
+    return 0;
+}
