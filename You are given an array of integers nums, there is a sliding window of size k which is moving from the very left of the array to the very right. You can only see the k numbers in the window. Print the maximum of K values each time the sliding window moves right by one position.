@@ -1,0 +1,35 @@
+from collections import deque
+
+# Function to find the maximum of K values in each sliding window
+def max_in_sliding_window(nums, k):
+    result = []
+    dq = deque()
+
+    for i in range(len(nums)):
+        # Remove elements outside the current window
+        while dq and dq[0] < i - k + 1:
+            dq.popleft()
+
+        # Remove smaller elements as they will not be useful
+        while dq and nums[dq[-1]] < nums[i]:
+            dq.pop()
+
+        dq.append(i)
+
+        # Add maximum to result for each window
+        if i >= k - 1:
+            result.append(nums[dq[0]])
+
+    return result
+
+# Read the number of test cases
+T = int(input())
+
+# Process each test case
+for _ in range(T):
+    # Read input for each test case
+    n, k = map(int, input().split())
+    nums = list(map(int, input().split()))
+
+    result = max_in_sliding_window(nums, k)
+    print(*result)
