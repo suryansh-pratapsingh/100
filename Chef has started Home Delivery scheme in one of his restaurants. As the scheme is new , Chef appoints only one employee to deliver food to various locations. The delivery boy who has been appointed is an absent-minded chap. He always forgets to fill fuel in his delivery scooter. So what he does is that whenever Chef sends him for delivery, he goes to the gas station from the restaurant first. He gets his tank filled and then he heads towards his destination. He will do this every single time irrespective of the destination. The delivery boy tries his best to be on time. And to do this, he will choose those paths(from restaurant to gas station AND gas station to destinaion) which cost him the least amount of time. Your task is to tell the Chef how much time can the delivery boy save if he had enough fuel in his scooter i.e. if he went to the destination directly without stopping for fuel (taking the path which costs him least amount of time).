@@ -1,0 +1,29 @@
+def delivery_time_and_savings(N, T, M, scenarios):
+    # Initialize the distance matrix using Floyd-Warshall algorithm
+    for k in range(N):
+        for i in range(N):
+            for j in range(N):
+                T[i][j] = min(T[i][j], T[i][k] + T[k][j])
+
+    for scenario in scenarios:
+        S, G, D = scenario
+
+        # Time taken by the delivery boy for the given path
+        time_taken = T[S][G] + T[G][D]
+
+        # Time he could have saved by going directly from S to D
+        direct_time = T[S][D]
+
+        # Calculate the savings
+        savings = time_taken - direct_time
+
+        print(time_taken, savings)
+
+# Input
+N = int(input())
+T = [list(map(int, input().split())) for _ in range(N)]
+M = int(input())
+scenarios = [tuple(map(int, input().split())) for _ in range(M)]
+
+# Output
+delivery_time_and_savings(N, T, M, scenarios)
