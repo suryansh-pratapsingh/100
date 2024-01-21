@@ -1,0 +1,76 @@
+#include <stdio.h>
+
+int isValidBoard(int board[50][50], int n) {
+    int countRow[n];
+    int countCol[n];
+    int i, j;
+
+    for (i = 0; i < n; ++i) {
+        countRow[i] = 0;
+        countCol[i] = 0;
+    }
+
+    for (i = 0; i < n; ++i) {
+        for (j = 0; j < n; ++j) {
+            countRow[i] += board[i][j];
+            countCol[j] += board[i][j];
+        }
+    }
+
+    for (i = 0; i < n; ++i) {
+        if (countRow[i] != n / 2 && countRow[i] != (n + 1) / 2) {
+            return 0; // Invalid board
+        }
+        if (countCol[i] != n / 2 && countCol[i] != (n + 1) / 2) {
+            return 0; // Invalid board
+        }
+    }
+
+    return 1; // Valid board
+}
+
+int minMovesToChessboard(int board[50][50], int n) {
+    // Check if the board can be transformed into a chessboard
+    if (!isValidBoard(board, n)) {
+        return -1;
+    }
+
+    // Calculate the number of moves to make the rows and columns alternating
+    int rowMoves = 0;
+    int colMoves = 0;
+    int i;
+
+    for (i = 0; i < n; ++i) {
+        rowMoves += board[i][0] != i % 2;
+        colMoves += board[0][i] != i % 2;
+    }
+
+    // Check if the total number of moves required for rows and columns have the same parity
+    if (rowMoves % 2 != colMoves % 2) {
+        return -1;
+    }
+
+    // Return the minimum number of moves required
+    return (rowMoves + colMoves) / 2;
+}
+
+int main() {
+    int T, n, i, j;
+    scanf("%d", &T);
+
+    for (i = 0; i < T; ++i) {
+        scanf("%d", &n);
+
+        int board[50][50];
+        for (j = 0; j < n; ++j) {
+            for (int k = 0; k < n; ++k) {
+                scanf("%d", &board[j][k]);
+            }
+        }
+
+        int result = minMovesToChessboard(board, n);
+        printf("%d\n", result);
+    }
+
+    return 0;
+}
