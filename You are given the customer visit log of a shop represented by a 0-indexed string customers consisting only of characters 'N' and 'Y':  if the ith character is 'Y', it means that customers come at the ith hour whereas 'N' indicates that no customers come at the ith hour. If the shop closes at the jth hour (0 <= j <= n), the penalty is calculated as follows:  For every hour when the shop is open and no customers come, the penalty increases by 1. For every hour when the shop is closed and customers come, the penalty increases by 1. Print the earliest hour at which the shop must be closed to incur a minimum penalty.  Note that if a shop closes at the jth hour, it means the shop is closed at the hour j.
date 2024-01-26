@@ -1,0 +1,29 @@
+def minimum_penalty_hour(customers):
+    n = len(customers)
+    zero_penalty = customers.count('N')  # Penalty when the shop is open and no customers come
+    one_penalty = customers.count('Y')  # Penalty when the shop is closed and customers come
+
+    prefix_zero_penalty = [0] * (n + 1)
+    prefix_one_penalty = [0] * (n + 1)
+
+    for i in range(n):
+        prefix_zero_penalty[i + 1] = prefix_zero_penalty[i] + (customers[i] == 'N')
+        prefix_one_penalty[i + 1] = prefix_one_penalty[i] + (customers[i] == 'Y')
+
+    min_penalty = float('inf')
+    min_hour = -1
+
+    for i in range(n + 1):
+        penalty = prefix_zero_penalty[i] + (prefix_one_penalty[n] - prefix_one_penalty[i])
+        if penalty < min_penalty:
+            min_penalty = penalty
+            min_hour = i
+
+    return min_hour
+
+# Input reading and processing
+t = int(input().strip())
+for _ in range(t):
+    customers = input().strip()
+    result = minimum_penalty_hour(customers)
+    print(result)
